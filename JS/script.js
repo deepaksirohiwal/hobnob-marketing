@@ -147,43 +147,9 @@ Array.from(socialMediaIcons).forEach((element, index)=>{
 })
 
 
-// On checking checkbox it should append a new class in influencers
+// On checking checkbox it should append a new component and to remove it!
 
-//To separately click on close button
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-// To create append a new container with close button on top
-var newContainer = document.getElementsByTagName("checkedElements");
-var i;
-for (i = 0; i < newContainer.length; i++) {
-  var span = document.createElement("SPAN");
-  var text = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(text);
-  newContainer[i].appendChild(span);
-}
-
-// To check whether the checkbox is checked
-// function checkBoxEvt(){
-//   var checkBox = document.getElementsByClassName('checkBoxes');
-//   if (checkBox.checked == true){
-    
-//     newContainer()
-//   } else {
-//     close();
-//   }
-
-// }
-
-
-
+// For target influencers
 var checkBoxes= document.getElementsByClassName('checkBoxes');
 var checkName= document.getElementsByClassName('checkName');
 var selectedItems= document.getElementById('selectedItem');
@@ -197,11 +163,9 @@ selectedItems.addEventListener("click", function(e) {
         checkBoxes[index].checked=false
         e.target.parentNode.parentNode.removeChild(e.target.parentNode)
         
-        
       } 
     })
      
-    // console.log(e.target.parentElement.innerText)
    }
 });
 
@@ -228,4 +192,44 @@ Array.from(checkBoxes).forEach((element,index)=>{
   
 })
 
+// For target audience
+var targetCheckBox = document.getElementsByClassName('targetBox');
+var targetName = document.getElementsByClassName('targetName');
+var displayItems = document.getElementById('targetDisplay');
+var insertedTargets = document.getElementsByClassName('insertedTargets');
 
+displayItems.addEventListener("click", function(e) { 
+  if(e.target && e.target.nodeName == "I") {  
+    Array.from(targetCheckBox).forEach((element,index)=>{
+      if(e.target.parentElement.innerText===targetName[index].innerHTML){
+        targetCheckBox[index].checked=false
+        e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+        
+      } 
+    })
+     
+   }
+});
+
+Array.from(targetCheckBox).forEach((element,index)=>{
+  element.addEventListener('change',(event)=>{
+    
+    if(element.checked){
+      var insertedValues=targetName[index].innerHTML;
+      displayItems.innerHTML +=`<span class="insertedTargets">${insertedValues}<i class="fa fa-times"></i></span>`
+      
+        }else if(element.checked != true){
+    Array.from(insertedTargets).forEach((value,loc)=>{
+     
+      if(value.innerText===targetName[index].innerHTML){
+        value.parentNode.removeChild(value)
+      }
+      
+    })       
+  
+    }
+  
+  }); 
+ 
+  
+})
