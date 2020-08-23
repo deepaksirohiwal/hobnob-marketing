@@ -188,18 +188,34 @@ var checkBoxes= document.getElementsByClassName('checkBoxes');
 var checkName= document.getElementsByClassName('checkName');
 var selectedItems= document.getElementById('selectedItem');
 var inserted = document.getElementsByClassName('inserted');
+var spans = document.getElementsByTagName('span');
 
-
+selectedItems.addEventListener("click", function(e) { 
+  if(e.target && e.target.nodeName == "I") {  
+    Array.from(checkBoxes).forEach((element,index)=>{
+      if(e.target.parentElement.innerText===checkName[index].innerHTML){
+        checkBoxes[index].checked=false
+        e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+        
+        
+      } 
+    })
+     
+    // console.log(e.target.parentElement.innerText)
+   }
+});
 
 Array.from(checkBoxes).forEach((element,index)=>{
   element.addEventListener('change',(event)=>{
+    
     if(element.checked){
       var insertedValue=checkName[index].innerHTML;
-      selectedItems.innerHTML +=`<span class="inserted">${insertedValue}</span>`
+      selectedItems.innerHTML +=`<span class="inserted">${insertedValue}<i class="fa fa-times"></i></span>`
       
         }else if(element.checked != true){
     Array.from(inserted).forEach((value,loc)=>{
-      if(value.innerHTML===checkName[index].innerHTML){
+     
+      if(value.innerText===checkName[index].innerHTML){
         value.parentNode.removeChild(value)
       }
       

@@ -430,3 +430,22 @@
     margin-left: 5%;
     width: 180px;
     }
+ /* checkbox styling */
+    .inserted{
+        background-color: #377a9f;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 20px;
+        display: inline-block;
+        margin: 4px 2px;
+        
+    }
+
+    i{
+        color:#ffffff;
+        padding: 0 0 0 3px;
+        cursor: pointer;
+    }
